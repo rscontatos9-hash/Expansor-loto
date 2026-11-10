@@ -50,11 +50,8 @@
         }
         .theme-lm .highlight-add { color: #fdba74; font-weight: 900; text-shadow: 0 0 8px var(--lm-glow); }
 
-        /* Focus dinâmico no textarea da base */
         #txt-base:focus { border-color: var(--lf); box-shadow: 0 0 10px var(--lf-glow); }
         .theme-lm #txt-base:focus { border-color: var(--lm); box-shadow: 0 0 10px var(--lm-glow); }
-
-        /* Focus no textarea do conferidor (sempre verde) */
         #txt-sorteio:focus { border-color: #10b981; box-shadow: 0 0 10px rgba(16,185,129,0.4); }
 
         @keyframes pulse-neon-lf {
@@ -71,7 +68,6 @@
 
         .btn-master { transition: all 0.3s ease; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; padding: 16px; border-radius: 12px; border: none; cursor: pointer; color: white; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-master:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
         .btn-master.disabled-state { background: #27272a !important; color: #71717a !important; box-shadow: none !important; transform: none !important; border: 1px solid #3f3f46 !important; animation: none !important; }
 
         .tabs-container { display: flex; background: rgba(24, 24, 27, 0.9); padding: 8px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); }
@@ -85,7 +81,6 @@
             margin: 2px; background: #27272a; color: #d4d4d8; border: 1px solid #3f3f46;
             transition: all 0.2s;
         }
-        /* ESTADO "MARCADO PELO PINCEL" — sobrescreve cor/glow */
         .bola-sm.hit {
             background: #10b981 !important;
             border-color: #6ee7b7 !important;
@@ -112,7 +107,6 @@
 
     <main class="w-full max-w-4xl p-2 md:p-6 pb-20">
 
-        <!-- NAVEGAÇÃO LOTOFÁCIL / LOTOMANIA -->
         <div class="tabs-container">
             <div id="btn-lf" onclick="setGame('lf')" class="tab-btn active"><i class="fa-solid fa-clover text-lg"></i> Lotofácil</div>
             <div id="btn-lm" onclick="setGame('lm')" class="tab-btn"><i class="fa-solid fa-dice-d20 text-lg"></i> Lotomania</div>
@@ -132,7 +126,6 @@
                 </div>
             </div>
 
-            <!-- CAIXA DE TEXTO PARA COLAR OS NÚMEROS RÁPIDO -->
             <div class="mb-4">
                 <textarea id="txt-base" class="w-full bg-[#09090b] border border-[#3f3f46] rounded-xl p-3 text-xs text-white font-mono h-16 outline-none transition-all" placeholder="Prefere colar os números? Cole aqui e clique em 'Carregar'..."></textarea>
                 <button onclick="carregarTexto()" class="mt-2 bg-[#27272a] hover:bg-[#3f3f46] text-white text-[10px] px-4 py-2 rounded uppercase font-bold tracking-widest transition shadow-md border border-[#3f3f46]">
@@ -140,10 +133,8 @@
                 </button>
             </div>
 
-            <!-- VOLANTE DINÂMICO -->
             <div id="volante" class="volante-grid-lf mono mt-6"></div>
 
-            <!-- EXIBIÇÃO VISUAL DOS NÚMEROS QUE SOBRARAM (AUSENTES) -->
             <div id="box-ausentes" class="hidden mt-4 bg-[#09090b] p-4 rounded-xl border border-dashed border-[#3f3f46]">
                  <h3 class="text-[11px] font-bold text-zinc-400 mb-2 uppercase tracking-widest"><i class="fa-solid fa-code-merge"></i> Os <span id="qtd-ausentes" class="text-white">10</span> Números Restantes (Não escolhidos):</h3>
                  <p class="text-[9px] text-zinc-500 mb-2">Esses números abaixo serão sorteados e injetados na sua base para expandir o cartão.</p>
@@ -151,7 +142,6 @@
             </div>
 
             <div class="mt-6 flex flex-col gap-4">
-                <!-- CONTROLES DE EXPANSÃO (LIVRE ESCOLHA) -->
                 <div class="bg-[#18181b] p-4 rounded-xl border border-[#3f3f46]">
 
                     <div class="flex justify-between items-center mb-4">
@@ -164,7 +154,6 @@
                         <input type="number" id="qtd-cartoes" class="input-styled" value="10" min="1" max="1000">
                     </div>
 
-                    <!-- OPÇÃO EXCLUSIVA LOTOMANIA (Expandir Base ou Espelho) -->
                     <div id="opt-lm-expand" class="hidden flex-col gap-2 mt-4 pt-4 border-t border-zinc-700">
                         <label class="text-[11px] uppercase font-bold text-orange-400">Estratégia de Matriz:</label>
                         <select id="lm-tipo-expansao" class="bg-[#09090b] text-white border border-[#3f3f46] rounded-lg p-3 font-mono text-xs outline-none">
@@ -186,7 +175,6 @@
             </div>
         </section>
 
-        <!-- PAINEL DE RESULTADOS -->
         <div id="panel-resultados" class="hidden">
             <div class="flex justify-between items-center mb-4 px-2 flex-wrap gap-2">
                 <h3 class="text-xs font-bold text-zinc-300 uppercase tracking-widest"><i class="fa-solid fa-ticket"></i> Cartões Gerados</h3>
@@ -197,7 +185,6 @@
                 💡 <b class="text-white">Legenda:</b> Os números escuros são a sua Matriz Principal (Fixa). Os números brilhantes (<span class="highlight-add">coloridos</span>) são as dezenas que sobraram e foram injetadas. Ao colar os sorteados abaixo, os acertos ficam <span class="text-emerald-400 font-bold">verdes</span>.
             </div>
 
-            <!-- ================== PINCEL MARCADOR ================== -->
             <div id="conferidor" class="bg-gradient-to-br from-emerald-950/40 to-[#18181b] border border-emerald-800/50 rounded-xl p-4 mb-4">
                 <div class="flex items-center justify-between mb-2">
                     <h4 class="text-xs uppercase font-bold text-emerald-300 tracking-widest">
@@ -216,25 +203,89 @@
                     <span id="range-sorteio" class="text-[9px] text-zinc-600 italic"></span>
                 </div>
             </div>
-            <!-- ================== FIM PINCEL ================== -->
 
             <div id="lista-cartoes" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
         </div>
 
     </main>
 
-    <!-- TOAST DE FEEDBACK -->
     <div id="toast" class="fixed bottom-6 left-1/2 bg-zinc-900 border border-zinc-700 text-xs px-4 py-2.5 rounded-full shadow-2xl pointer-events-none z-[100] max-w-[90vw] text-center"
          style="opacity:0; transform: translate(-50%, 8px); transition: all 0.3s ease; color:#e4e4e7;"></div>
 
     <script>
+        /* ============================================================
+           ESTADO POR JOGO — cada jogo (LF/LM) mantém seu próprio estado
+           Nada é apagado ao trocar de tela. Estado também persiste no
+           localStorage do navegador (sobrevive ao fechar a aba).
+        ============================================================ */
+        const STORAGE_KEY = 'expansor_quantico_v2_estado';
+
+        function estadoInicial() {
+            return {
+                jogoAtivo: 'lf',
+                lf: {
+                    base: [],
+                    txtBase: '',
+                    txtSorteio: '',
+                    tamanho: 18,
+                    qtd: 10,
+                    cartoes: [],       // cartões gerados ficam guardados
+                    tamanhoGerado: 18
+                },
+                lm: {
+                    base: [],
+                    txtBase: '',
+                    txtSorteio: '',
+                    tamanho: 66,
+                    qtd: 10,
+                    tipoExpansao: 'espelho',
+                    cartoes: [],
+                    tamanhoGerado: 66
+                }
+            };
+        }
+
+        let estado = carregarEstado();
+
+        function carregarEstado() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return estadoInicial();
+                const salvo = JSON.parse(raw);
+                const base = estadoInicial();
+                // merge defensivo (garante compatibilidade se a estrutura mudar)
+                return {
+                    jogoAtivo: salvo.jogoAtivo || base.jogoAtivo,
+                    lf: { ...base.lf, ...(salvo.lf || {}) },
+                    lm: { ...base.lm, ...(salvo.lm || {}) }
+                };
+            } catch (e) {
+                console.warn('Falha ao carregar estado, usando inicial.', e);
+                return estadoInicial();
+            }
+        }
+
+        let salvarTimer;
+        function salvarEstado() {
+            clearTimeout(salvarTimer);
+            salvarTimer = setTimeout(() => {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+                } catch (e) {
+                    console.warn('Falha ao salvar estado.', e);
+                }
+            }, 250);
+        }
+
+        function s() { return estado[estado.jogoAtivo]; } // atalho para o estado do jogo atual
+
+        /* ---------------- ATALHOS / CONSTANTES ---------------- */
         let game = 'lf';
-        let baseSelecionada = [];
+        let baseSelecionada = [];      // sempre aponta para s().base
         let limiteBase = 15;
         let minExpansao = 15;
         let maxExpansao = 25;
 
-        // Formata número com 2 dígitos
         const z = (n) => n < 10 ? '0' + n : String(n);
 
         /* ---------------- TOAST ---------------- */
@@ -260,11 +311,16 @@
 
         /* ---------------- CONFIG DE JOGO ---------------- */
         function setGame(tipo) {
+            estado.jogoAtivo = tipo;
             game = tipo;
-            baseSelecionada = [];
-            document.getElementById('txt-base').value = '';
-            document.getElementById('txt-sorteio').value = '';
-            document.getElementById('contador-sorteio').textContent = '0';
+            salvarEstado();
+            aplicarConfigJogo();
+        }
+
+        function aplicarConfigJogo() {
+            const tipo = game;
+            const cur = s();
+            baseSelecionada = cur.base; // mesma referência — alterações refletem no estado
 
             const optLm = document.getElementById('opt-lm-expand');
 
@@ -275,7 +331,6 @@
                 document.getElementById('desc-jogo').innerText = 'Selecione 15 números. Os 10 restantes expandirão o cartão para 18 (ou o limite que quiser).';
                 optLm.classList.add('hidden');
                 optLm.classList.remove('flex');
-                document.getElementById('tamanho-cartao').value = 18;
                 limiteBase = 15; minExpansao = 15; maxExpansao = 25;
                 document.getElementById('range-sorteio').textContent = 'Range: 01–25 · máx. 25 dezenas';
             } else {
@@ -285,15 +340,37 @@
                 document.getElementById('desc-jogo').innerText = 'Selecione 50 números. O sistema usará o espelho para expandir para 66 (Livre Escolha).';
                 optLm.classList.remove('hidden');
                 optLm.classList.add('flex');
-                document.getElementById('tamanho-cartao').value = 66;
                 limiteBase = 50; minExpansao = 50; maxExpansao = 100;
                 document.getElementById('range-sorteio').textContent = 'Range: 00–99 · máx. 100 dezenas';
             }
 
             document.getElementById('btn-lf').classList.toggle('active', tipo === 'lf');
             document.getElementById('btn-lm').classList.toggle('active', tipo === 'lm');
-            document.getElementById('panel-resultados').classList.add('hidden');
+
+            // 🔑 RESTAURA os campos do jogo SEM apagar
+            document.getElementById('txt-base').value = cur.txtBase || '';
+            document.getElementById('txt-sorteio').value = cur.txtSorteio || '';
+            document.getElementById('tamanho-cartao').value = cur.tamanho;
+            document.getElementById('qtd-cartoes').value = cur.qtd;
+            if (tipo === 'lm') {
+                document.getElementById('lm-tipo-expansao').value = cur.tipoExpansao || 'espelho';
+            }
+
             renderizarVolante();
+
+            // 🔑 RESTAURA os cartões gerados e o painel
+            if (cur.cartoes && cur.cartoes.length > 0) {
+                renderizarResultados(cur.cartoes, cur.tamanhoGerado, /*silencioso=*/true);
+                document.getElementById('panel-resultados').classList.remove('hidden');
+                conferir();
+            } else {
+                document.getElementById('panel-resultados').classList.add('hidden');
+                document.getElementById('lista-cartoes').innerHTML = '';
+                document.getElementById('resumo-geral').textContent = '';
+                document.getElementById('contador-sorteio').textContent = '0';
+            }
+
+            atualizarContador();
         }
 
         /* ---------------- CARREGAR VIA TEXTO ---------------- */
@@ -322,7 +399,10 @@
                 numeros = numeros.slice(0, limiteBase);
                 msg += ` · limitado a ${limiteBase}`;
             }
-            baseSelecionada = numeros;
+            baseSelecionada.length = 0;
+            baseSelecionada.push(...numeros);
+            s().txtBase = document.getElementById('txt-base').value;
+            salvarEstado();
             renderizarVolante();
             showToast(msg, 'success');
         }
@@ -339,6 +419,8 @@
                 showToast(`Limite máximo físico é ${maxExpansao}. Reduzindo automaticamente.`, 'error');
                 el.value = maxExpansao;
             }
+            s().tamanho = parseInt(el.value, 10);
+            salvarEstado();
             return parseInt(el.value, 10);
         }
 
@@ -372,6 +454,7 @@
                         baseSelecionada.push(i);
                         bola.classList.add('active');
                     }
+                    salvarEstado();
                     atualizarContador();
                 };
                 container.appendChild(bola);
@@ -380,7 +463,6 @@
         }
 
         function atualizarContador() {
-            // FIX: não destrói mais o span "lbl-max-base" — apenas reconstrói o innerHTML completo
             const contEl = document.getElementById('contador-base');
             contEl.innerHTML = `${baseSelecionada.length}<span class="text-[10px] text-zinc-600">/${limiteBase}</span>`;
 
@@ -414,11 +496,18 @@
         }
 
         function limpar() {
-            baseSelecionada = [];
+            baseSelecionada.length = 0;
+            const cur = s();
+            cur.txtBase = '';
+            cur.txtSorteio = '';
+            cur.cartoes = [];
             document.getElementById('txt-base').value = '';
             document.getElementById('txt-sorteio').value = '';
             document.getElementById('contador-sorteio').textContent = '0';
             document.getElementById('panel-resultados').classList.add('hidden');
+            document.getElementById('lista-cartoes').innerHTML = '';
+            document.getElementById('resumo-geral').textContent = '';
+            salvarEstado();
             renderizarVolante();
         }
 
@@ -439,7 +528,12 @@
             const tamanhoAlvo = validarTamanho();
             let qtd = parseInt(document.getElementById('qtd-cartoes').value, 10);
             if (isNaN(qtd) || qtd < 1) qtd = 1;
-            qtd = Math.min(qtd, 1000); // FIX: limite superior no JS (evita travar o navegador)
+            qtd = Math.min(qtd, 1000);
+
+            const cur = s();
+            cur.qtd = qtd;
+            cur.tamanho = tamanhoAlvo;
+            if (game === 'lm') cur.tipoExpansao = document.getElementById('lm-tipo-expansao').value;
 
             const universo = [];
             const start = game === 'lf' ? 1 : 0;
@@ -457,7 +551,7 @@
                     resultados.push({ cartao: cartaoFinal, injetadas });
                 }
             } else {
-                const tipoLm = document.getElementById('lm-tipo-expansao').value;
+                const tipoLm = cur.tipoExpansao;
                 const dezenasFaltantes = tamanhoAlvo - 50;
 
                 for (let i = 0; i < qtd; i++) {
@@ -475,10 +569,15 @@
                 }
             }
 
+            // 🔑 Guarda no estado do jogo
+            cur.cartoes = resultados;
+            cur.tamanhoGerado = tamanhoAlvo;
+            salvarEstado();
+
             renderizarResultados(resultados, tamanhoAlvo);
         }
 
-        function renderizarResultados(resultados, tamanho) {
+        function renderizarResultados(resultados, tamanho, silencioso = false) {
             const container = document.getElementById('lista-cartoes');
             container.innerHTML = '';
 
@@ -510,8 +609,10 @@
             });
 
             document.getElementById('panel-resultados').classList.remove('hidden');
-            conferir(); // Reaplica marcações se o campo de sorteio já tiver conteúdo
-            setTimeout(() => document.getElementById('panel-resultados').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+            conferir();
+            if (!silencioso) {
+                setTimeout(() => document.getElementById('panel-resultados').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+            }
         }
 
         /* ---------------- PINCEL MARCADOR ---------------- */
@@ -571,15 +672,38 @@
             } else {
                 resumo.textContent = '';
             }
+
+            // 🔑 Persiste o texto do conferidor
+            s().txtSorteio = txtEl.value;
+            salvarEstado();
         }
 
         function limparConferencia() {
             document.getElementById('txt-sorteio').value = '';
+            s().txtSorteio = '';
+            salvarEstado();
             conferir();
         }
 
-        // Init
-        setGame('lf');
+        /* ---------------- INIT ---------------- */
+        game = estado.jogoAtivo || 'lf';
+        aplicarConfigJogo();
+
+        // Persiste alterações de texto (base/sorteio) enquanto digita
+        document.getElementById('txt-base').addEventListener('input', (e) => {
+            s().txtBase = e.target.value;
+            salvarEstado();
+        });
+        document.getElementById('qtd-cartoes').addEventListener('input', (e) => {
+            s().qtd = parseInt(e.target.value, 10) || 1;
+            salvarEstado();
+        });
+        document.getElementById('lm-tipo-expansao').addEventListener('change', (e) => {
+            if (game === 'lm') {
+                s().tipoExpansao = e.target.value;
+                salvarEstado();
+            }
+        });
     </script>
 </body>
 </html>
